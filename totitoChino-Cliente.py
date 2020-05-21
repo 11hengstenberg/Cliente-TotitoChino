@@ -17,12 +17,11 @@ tournament_id=input("Inserte el ID del torneo\n")
 username=input("Inserte su ID\n")
 
 
-
-
 socket = socketio.Client()
 
 @socket.on("connect")
 def on_connect():
+
     socket.emit("signin",
         {
             "user_name": username,
@@ -30,6 +29,7 @@ def on_connect():
             "user_role": "player"
         } 
     )
+
 
 @socket.on("ready")
 def on_ready(data):
@@ -63,6 +63,11 @@ def finish(data):
         	"player_turn_id":data['player_turn_id']
         }
     )
+
+    ##agregar para ver si se desconecto
+    ##agregar para ver si se desconecto
+    ##agregar para ver si se desconecto
+
 
 
 #conectamos al host
