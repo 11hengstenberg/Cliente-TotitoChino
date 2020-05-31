@@ -8,26 +8,15 @@ gamesL = 0
 
 #juego terminado
 def miniMax(board, depth, isMax, player_turn_id):
-
         if (player_turn_id==1):
             posicionCorrecta=1
         if (player_turn_id==2):
             posicionCorrecta=-1
         cuadrosL1=cuadrosCompletos(board)
 
-        score =evaluate(board,player_turn_id)
+        score = evaluate(board,player_turn_id)
 
-        if(depth==3):
-            return score
-
-        if  (score== 1):
-            return score
-        if (score == -1):
-            return score
-
-
-        #score =  evaluate(board,player_turn_id)
-        if(isMoveLeft(board) == False):
+        if(depth==2 or not isMoveLeft(board)):
             return score
         
         #maximizar
@@ -42,8 +31,7 @@ def miniMax(board, depth, isMax, player_turn_id):
                             board[i][j]=1*posicionCorrecta
                         if (cuadrosL2-cuadrosL1==2):
                             board[i][j]=2*posicionCorrecta
-                        best = max(best,miniMax(board,depth+1,False,player_turn_id))
-                        print(best)
+                        best = max(best,miniMax(board,depth+1,False, (player_turn_id % 2) + 1))
                         board[i][j]=99
  
             return best
@@ -59,7 +47,7 @@ def miniMax(board, depth, isMax, player_turn_id):
                             board[i][j]=1*-1*posicionCorrecta
                         if (cuadrosL2-cuadrosL1==2):
                             board[i][j]=2*-1*posicionCorrecta
-                        best = min(best,miniMax(board,depth+1,True,player_turn_id))
+                        best = min(best,miniMax(board,depth+1,True, (player_turn_id % 2) + 1))
                         board[i][j]=99
             return best
 
@@ -95,8 +83,7 @@ def findBestMove (board,player_turn_id):
                     bestMoveLocation = i
                     bestMovePosition = j
                     bestVal=moveVal
-             
-    print(bestMoveLocation,bestMovePosition)                    
+
     return[bestMoveLocation,bestMovePosition]
     #dreturn [random.randint(0,1), random.randint(0,29)]
     
