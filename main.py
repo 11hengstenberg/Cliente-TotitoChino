@@ -3,9 +3,9 @@
 #libreria
 import socketio
 import random
-from funciones import miniMax
 from funciones import contador
 from funciones import findBestMove
+from funciones import isMoveLeft
 
 
 
@@ -44,8 +44,8 @@ def on_connect():
 
 @socket.on("ready")
 def on_ready(data):
-    print(data["board"])
-    
+    print (data["board"])
+
     #miniMax(data["player_turn_id"], data["game_id"],data["board"],data["movementNumber"])
     #print (data["board"])
     #obtener informacion y tablero.
@@ -57,13 +57,12 @@ def on_ready(data):
         "game_id" : data["game_id"],
         "player_turn_id": data["player_turn_id"],
         #movimiento random
-        "movement":  findBestMove(data["board"],data["player_turn_id"])
+        "movement": findBestMove(data["board"],data["player_turn_id"])
         
        }
     ) 
 @socket.on("finish")
-def finish(data):
-    
+def finish(data):    
 
     #evaluate(data["board"],data["player_turn_id"])
     if (data["player_turn_id"] == data["winner_turn_id"]):
@@ -80,29 +79,6 @@ def finish(data):
         "player_turn_id": data["player_turn_id"]
     }
     )
-
-
-"""    
-@socket.on("fin")
-def fin(data): 
-    ejemplo()
-    #Fernando Hengstenberg
-    #recibimos la informacion.
-    #gameid
-    #turno del jugador
-    #winer-id
-    #board
-    #limpiar variables
-	socket.emit("player_ready",
-    {
-        	"tournament_id":tournament_id,
-        	"game_id":data["game_id"],
-        	"player_turn_id":data["player_turn_id"]
-    }
-    )
-"""
-
-
 
 
 #conectamos al host
