@@ -51,8 +51,6 @@ def evaluate(board, move,playerNumber,isMax):
     if (isMax == False):
         return ((-1) * (punteo - punteo1))
 
-
-
 #find the best move for play
 def findBestMove(board, player_turn_id):
     best= -10000
@@ -106,7 +104,6 @@ def miniMax (board, depth, isMax, player_turn_id,alpha, beta,nodeIndex,move):
 
         board[move[0]][move[1]] = 99
         return best
-
     return 0
 
 def movesLeft(board):
@@ -134,7 +131,6 @@ def newMove(board, move, playerNumber, isMax):
             acumulador = 0
 
     board[move[0]][move[1]] = 0
-
     acumulador = 0
     contador = 0
 
