@@ -1,24 +1,14 @@
 #Fernando Hengstenberg
-
-#libreria
+ 
+#importamos las librerias
 import socketio
-import random
-from funciones import contador
-from funciones import findBestMove
-from funciones import isMoveLeft
+from functions import findBestMove
 
+#data
 
-
-
-#pedimos la direccion del host
+#url host
 host= "http://localhost:4000"
 #host=input("Inserte el host\n")
-
-#contador de juegos
-gamesF = 0
-gamesW = 0
-gamesL = 0
-
 
 #pedimos el id del torneo
 tournament_id=12
@@ -28,11 +18,12 @@ tournament_id=12
 username=input("Inserte su ID\n")
 
 
-socket = socketio.Client()
 
+#sockets of server
+socket = socketio.Client()
+#connect server
 @socket.on("connect")
 def on_connect():
-    #contador de juegos
     socket.emit("signin",
         {
             "user_name": username,
@@ -41,36 +32,28 @@ def on_connect():
         } 
     )
 
-
+#play movement
 @socket.on("ready")
 def on_ready(data):
     print (data["board"])
-
-    #miniMax(data["player_turn_id"], data["game_id"],data["board"],data["movementNumber"])
+   
     #print (data["board"])
-    #obtener informacion y tablero.
-    #turno
+    #get data
+    #turn
     #Gameid
     socket.emit("play",
     {
         "tournament_id": tournament_id,
         "game_id" : data["game_id"],
         "player_turn_id": data["player_turn_id"],
-        #movimiento random
+        #random movement
         "movement": findBestMove(data["board"],data["player_turn_id"])
         
        }
     ) 
+#game finish and readty for play
 @socket.on("finish")
 def finish(data):    
-
-    #evaluate(data["board"],data["player_turn_id"])
-    if (data["player_turn_id"] == data["winner_turn_id"]):
-        contador(1,0)
-
-    if (data["player_turn_id"] != data["winner_turn_id"]):
-        contador(0,1)
-        
     
     socket.emit("player_ready",
     {
