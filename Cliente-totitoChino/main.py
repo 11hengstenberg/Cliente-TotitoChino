@@ -1,21 +1,21 @@
-#Fernando Hengstenberg
- 
+"""
+Fernando Hengstenberg
+
+"""
 #importamos las librerias
 import socketio
 from functions import findBestMove
 from board import humanBoard
 
-#data
-
 #url host
-host= "http://localhost:4000"
-#host=input("Inserte el host\n")
+#host= "http://localhost:4000"
+host=input("Inserte el host\n")
 
-#pedimos el id del torneo
-tournament_id=12
-#tournament_id=input("Inserte el ID del torneo\n")
+#tournament id
+#tournament_id=12
+tournament_id=input("Inserte el ID del torneo\n")
 
-#pedimos el usuario
+#user or playerid
 username=input("Inserte su ID\n")
 
 
