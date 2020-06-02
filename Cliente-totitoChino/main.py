@@ -3,6 +3,7 @@
 #importamos las librerias
 import socketio
 from functions import findBestMove
+from board import humanBoard
 
 #data
 
@@ -35,8 +36,11 @@ def on_connect():
 #play movement
 @socket.on("ready")
 def on_ready(data):
-    print (data["board"])
-   
+    print ("----------tablero----------")
+    print ("")
+    print ("")
+    print ("")
+    print (humanBoard(data["board"]))
     #print (data["board"])
     #get data
     #turn
@@ -53,7 +57,13 @@ def on_ready(data):
     ) 
 #game finish and readty for play
 @socket.on("finish")
-def finish(data):    
+def finish(data):
+
+    print ("----------tablero----------")
+    print ("")
+    print ("")
+    print ("")
+    print (humanBoard(data["board"]))    
     
     socket.emit("player_ready",
     {
